@@ -1,0 +1,125 @@
+diff --git a/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCEventSource.java b/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCEventSource.java
+--- a/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCEventSource.java
++++ b/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCEventSource.java
+@@ -10,7 +10,7 @@
+ 
+     private static CTCEventSource instance;
+ 
+-    static CTCEventSource getInstance() {
++    public static CTCEventSource getInstance() {
+         if (instance == null) {
+             instance = new CTCEventSource();
+         }
+diff --git a/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCRobotPeer.java b/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCRobotPeer.java
+--- a/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCRobotPeer.java
++++ b/cacio-tta/src/main/java/net/java/openjdk/cacio/ctc/CTCRobotPeer.java
+@@ -8,6 +8,7 @@
+ 
+ import sun.awt.peer.cacio.CacioMouseInfoPeer;
+ import sun.awt.peer.cacio.managed.EventData;
++import sun.awt.peer.cacio.managed.PlatformScreen;
+ 
+ public class CTCRobotPeer implements RobotPeer {
+ 
+@@ -36,7 +37,7 @@
+     private EventData mouseEvent(int id, int currentButton, boolean popup) {
+         EventData ev = new EventData();
+         ev.setId(id);
+-        ev.setSource(CTCScreen.getInstance());
++        ev.setSource(getPlatformScreen());
+         ev.setTime(System.currentTimeMillis());
+         ev.setModifiers(currentModifiers);
+         ev.setX(currentX);
+@@ -109,7 +110,7 @@
+ 
+     private void keyEvent(int keycode, int id) {
+         EventData ev = new EventData();
+-        ev.setSource(CTCScreen.getInstance());
++        ev.setSource(getPlatformScreen());
+         ev.setId(id);
+         ev.setTime(System.currentTimeMillis());
+         ev.setModifiers(currentModifiers);
+@@ -133,7 +134,7 @@
+         char keychar = getKeyCharFromCodeAndMods(keycode, currentModifiers);
+         if (keychar != KeyEvent.CHAR_UNDEFINED) {
+           EventData ev = new EventData();
+-          ev.setSource(CTCScreen.getInstance());
++          ev.setSource(getPlatformScreen());
+           ev.setId(KeyEvent.KEY_TYPED);
+           ev.setTime(System.currentTimeMillis());
+           ev.setModifiers(currentModifiers);
+@@ -177,4 +178,8 @@
+ 
+     }
+ 
++	protected PlatformScreen getPlatformScreen() {
++		return CTCScreen.getInstance();
++	}
++
+ }
+diff --git a/cacio-web/pom.xml b/cacio-web/pom.xml
+--- a/cacio-web/pom.xml
++++ b/cacio-web/pom.xml
+@@ -44,6 +44,7 @@
+   </dependencies>
+ 
+   <build>
++  <pluginManagement>
+     <plugins>
+       <plugin>
+         <artifactId>maven-antrun-plugin</artifactId>
+@@ -109,5 +110,6 @@
+         </configuration>
+       </plugin>
+     </plugins>
++    </pluginManagement>
+   </build>
+ </project>
+diff --git a/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebScreen.java b/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebScreen.java
+--- a/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebScreen.java
++++ b/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebScreen.java
+@@ -68,6 +68,12 @@
+ 
+     private EventData eventData;
+     private WebSurfaceData surfaceData;
++    
++	public WebScreen() {
++	screenLock = new ReentrantLock();
++	screenCondition = screenLock.newCondition();
++	pendingUpdateList = new ArrayList<ScreenUpdate>();
++	}
+ 
+     protected WebScreen(WebGraphicsConfiguration config) {
+ 	this.config = config;
+@@ -260,7 +266,7 @@
+ 	try {
+ 	    lockScreen();
+ 	    
+-	    encoder = WebSessionManager.getInstance().getCurrentState().getBackend();
++	    encoder = getEncoder();
+ 	    
+ 	    List<ScreenUpdate> screenUpdates = surfaceData.fetchPendingSurfaceUpdates();
+ 	    if (screenUpdates != null) {
+@@ -290,6 +296,10 @@
+ 
+ 	return false;
+     }
++    
++    protected Transport getEncoder() {
++    return WebSessionManager.getInstance().getCurrentState().getBackend();
++    }
+ 
+     public ArrayList<ScreenUpdate> getPendingUpdateList() {
+ 	return pendingUpdateList;
+diff --git a/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebSurfaceManagerFactory.java b/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebSurfaceManagerFactory.java
+--- a/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebSurfaceManagerFactory.java
++++ b/cacio-web/src/main/java/net/java/openjdk/awt/peer/web/WebSurfaceManagerFactory.java
+@@ -35,7 +35,7 @@
+  * @author Clemens Eisserer <linuxhippy@gmail.com>
+  * @author Mario Torre <neugens.limasoftware@gmail.com>
+  */
+-class WebSurfaceManagerFactory extends SurfaceManagerFactory {
++public class WebSurfaceManagerFactory extends SurfaceManagerFactory {
+ 
+     public WebSurfaceManagerFactory() {
+     }
