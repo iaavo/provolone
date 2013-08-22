@@ -1,9 +1,13 @@
+# Dependant projects #
+caciocavallo
+swingset2
+testInProgress
+
 # Automatically generated #
 .metadata
 .classpath
 .project
 .settings
-caciocavallo
 
 # Binaries #
 target
