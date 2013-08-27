@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 
 import net.java.openjdk.awt.peer.web.WebGraphicsConfiguration;
 import net.java.openjdk.awt.peer.web.WebScreen;
+import net.java.openjdk.cacio.servlet.transport.BinaryPngTransport;
 import net.java.openjdk.cacio.servlet.transport.PNGTransport;
 import net.java.openjdk.cacio.servlet.transport.Transport;
 import sun.awt.peer.cacio.managed.FullScreenWindowFactory;
@@ -51,6 +52,6 @@ public class PTPScreen extends WebScreen {
 
 	@Override
 	protected Transport getEncoder() {
-		return new PNGTransport();
+		return Transport.getTransportForName(Transport.FORMAT_PNG_IMG, 3);
 	}
 }

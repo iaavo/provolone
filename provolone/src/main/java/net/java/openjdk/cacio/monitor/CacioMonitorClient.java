@@ -136,7 +136,7 @@ public class CacioMonitorClient {
 						// this.panel.setIcon(null);
 						setStatus("Trying to connect...");
 						socket = new Socket("127.0.0.1",
-								CacioMonitorServer.PORT);
+								CacioMonitorServerBurster.PORT);
 						appendStatus("Success");
 					} catch (Exception e1) {
 						appendStatus("Fail");

@@ -13,6 +13,10 @@ testInProgress
 target
 *.class
 
+# Shared Libraries #
+*.so
+*.dll
+
 # Package Files #
 *.jar
 *.war
