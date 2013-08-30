@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 import net.java.openjdk.awt.peer.web.WebSystemTrayPeer;
 import net.java.openjdk.cacio.ctc.CTCEventSource;
-import net.java.openjdk.cacio.monitor.CacioMonitorServer;
+import net.java.openjdk.cacio.monitor.CacioMonitorServerBurster;
 import sun.awt.peer.cacio.CacioToolkit;
 import sun.awt.peer.cacio.PlatformWindowFactory;
 import sun.awt.peer.cacio.managed.FullScreenWindowFactory;
@@ -43,18 +43,19 @@ public class PTPToolkit extends CacioToolkit {
 
 	public PTPToolkit() {
 		super();
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					new CacioMonitorServer(8081, 125);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}).start();
+		new CacioMonitorServerBurster(8081, 125);
+//		new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				try {
+//					new CacioMonitorServerBurster(8081, 125);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}).start();
 
 		setDecorateWindows(true);
 	}

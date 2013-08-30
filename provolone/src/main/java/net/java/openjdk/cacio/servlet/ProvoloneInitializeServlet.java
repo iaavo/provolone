@@ -45,34 +45,38 @@ public class ProvoloneInitializeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String startHtml = null;
 
-    public ProvoloneInitializeServlet() throws Exception {
-	startHtml = loadStartHTML();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	// TODO be able to set in some sort of property
-	String format = "png_img";
-	format = (format != null && format.trim().length() > 0) ? format.toLowerCase() : "rle";
-
-	response.setContentType("text/html");
-	String ssidStartHtml = startHtml.replaceAll("IMGFORMAT", "\"" + format + "\"");
-	response.getWriter().write(ssidStartHtml);
-    }
-
-    /**
-     * Loads the html code from the classpath.
-     * 
-     * @return
-     * @throws Exception
-     */
-    protected String loadStartHTML() throws Exception {
-	StringBuilder htmlBuilder = new StringBuilder(8192);
-	Reader r = new InputStreamReader(getClass().getResourceAsStream("/StreamBase.html"), "UTF-8");
-	int read;
-	while ((read = r.read()) != -1) {
-	    htmlBuilder.append((char) read);
+	public ProvoloneInitializeServlet() throws Exception {
+		startHtml = loadStartHTML();
 	}
-	return htmlBuilder.toString();
-    }
+
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO be able to set in some sort of property
+		String format = request.getParameter("format");
+		format = (format != null && format.trim().length() > 0) ? format
+				.toLowerCase() : "png";
+
+		response.setContentType("text/html");
+		String ssidStartHtml = startHtml.replaceAll("IMGFORMAT", "\"" + format
+				+ "\"");
+		response.getWriter().write(ssidStartHtml);
+	}
+
+	/**
+	 * Loads the html code from the classpath.
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	protected String loadStartHTML() throws Exception {
+		StringBuilder htmlBuilder = new StringBuilder(8192);
+		Reader r = new InputStreamReader(getClass().getResourceAsStream(
+				"/StreamBase.html"), "UTF-8");
+		int read;
+		while ((read = r.read()) != -1) {
+			htmlBuilder.append((char) read);
+		}
+		return htmlBuilder.toString();
+	}
 }

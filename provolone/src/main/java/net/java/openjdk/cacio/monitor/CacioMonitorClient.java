@@ -83,46 +83,7 @@ public class CacioMonitorClient {
 		this.panel = new JLabel();
 		this.panel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.panel.setVerticalAlignment(SwingConstants.CENTER);
-		// this.panel.setOpaque(true);
-		// this.panel.setBackground(Color.BLACK);
 		panel.setIcon(new ImageIcon(completeImage));
-		panel.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// try {
-				// os.write(1);
-				// os.flush();
-				// } catch (IOException e1) {
-				// // TODO Auto-generated catch block
-				// e1.printStackTrace();
-				// }
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
 		frame.add(this.panel, BorderLayout.CENTER);
 	}
 
@@ -231,6 +192,11 @@ public class CacioMonitorClient {
 						}
 					} catch (IOException e) {
 						appendStatus(" failed. (" + e.getMessage() + ")");
+						try {
+							socket.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 					// Wait for next image
 					try {
