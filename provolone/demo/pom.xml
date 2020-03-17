@@ -47,6 +47,24 @@
 			<version>1.4-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.java.openjdk.cacio</groupId>
+			<artifactId>cacio-tta</artifactId>
+			<version>1.4-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.java.openjdk.cacio</groupId>
+			<artifactId>cacio-web</artifactId>
+			<version>1.4-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.java.openjdk.cacio</groupId>
+			<artifactId>cacio-shared</artifactId>
+			<version>1.4-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -68,6 +86,9 @@
 					<includes>
 						<include>ProgressAllTests.java</include>
 					</includes>
+				    <additionalClasspathElements>
+				  	    <additionalClasspathElement>./</additionalClasspathElement>
+				    </additionalClasspathElements>
 					<systemPropertyVariables>
 						<awt.toolkit>net.java.openjdk.cacio.provolone.PTPToolkit </awt.toolkit>
 						<java.awt.graphicsenv>net.java.openjdk.cacio.provolone.PTPGraphicsEnvironment</java.awt.graphicsenv>
