@@ -1,1 +1,1 @@
-git clone https://github.com/iaavo/testInProgress.git testInProgress
+git clone https://github.com/iaavo/testInProgress-plugin.git testInProgress
