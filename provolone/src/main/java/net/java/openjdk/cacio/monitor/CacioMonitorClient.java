@@ -1,8 +1,6 @@
 package net.java.openjdk.cacio.monitor;
 
 import java.awt.BorderLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.EOFException;
@@ -25,6 +23,9 @@ import javax.swing.WindowConstants;
 import net.java.openjdk.awt.peer.web.BlitScreenUpdate;
 import net.java.openjdk.awt.peer.web.WebRect;
 
+/**
+ * Class to connect to 
+ */
 public class CacioMonitorClient {
 
 	public static void main(String[] args) {
@@ -118,7 +119,7 @@ public class CacioMonitorClient {
 						while (true) {
 							// Receive the type of update
 							int type = readInt(is);
-//							System.out.println("Type: " + type);
+							// System.out.println("Type: " + type);
 							if (type == 0) {
 								List<BlitScreenUpdate> commands = new ArrayList<BlitScreenUpdate>();
 								int x1 = readInt(is);
