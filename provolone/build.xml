@@ -1,0 +1,39 @@
+<project name="SwingSet2FestTests" default="dist" basedir=".">
+    <description>
+        Builds a sample junit fest test to demonstrate provolone.
+    </description>
+  <property name="src" location="src/main/demo"/>
+  <property name="build" location="target/test-classes"/>
+  <property name="dist"  location="target"/>
+  <property name="distfile"  location="${dist}/SwingSet2FestTests.jar"/>
+
+  <target name="init">
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <javac srcdir="${src}" destdir="${build}" classpath="SwingSet2.jar;testInProgress-plugin.jar">
+	  <classpath>
+        <fileset dir="../swingset2">
+          <include name="SwingSet2.jar"/>
+        </fileset>
+		<fileset dir="../testInProgress/testInProgress-plugin/target">
+          <include name="testInProgress-plugin.jar"/>
+        </fileset>
+	  </classpath>
+	</javac>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <mkdir dir="${dist}"/>
+    <jar jarfile="${distfile}" basedir="${build}"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <delete dir="${build}"/>
+    <delete file="${distfile}"/>
+  </target>
+</project>
