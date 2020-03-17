@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>net.java.openjdk.cacio</groupId>
 			<artifactId>provolone</artifactId>
-			<version>SNAPSHOT</version>
+			<version>1.4-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -76,5 +76,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
