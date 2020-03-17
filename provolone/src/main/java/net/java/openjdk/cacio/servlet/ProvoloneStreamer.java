@@ -46,7 +46,7 @@ public class ProvoloneStreamer extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String format = request.getParameter("format");
+		String format = request.getParameter("subSessionID");
 		format = (format != null && format.trim().length() > 0) ? format
 				.toLowerCase() : "png";
 

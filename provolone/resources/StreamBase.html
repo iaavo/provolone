@@ -56,13 +56,14 @@ var isIE = navigator.userAgent.indexOf('MSIE') > -1;
 
 //Will be filled in by the SessionInitializeServlet at request time
 var imgFormat = IMGFORMAT;
+var subSessionID = imgFormat;
 
 function init() {
 	var canvas = document.getElementById('blackboard');
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	
-	chooseTransport();    
+	subSessionID = chooseTransport();    
     startRequestFunc(subSessionID);
 	
     initEventFunc();

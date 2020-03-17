@@ -30,7 +30,7 @@ public class CacioMonitorServer {
 	 * @throws Exception
 	 */
 	public CacioMonitorServer(int port, int maxThreads) throws Exception {
-		applySystemProperties();
+//		applySystemProperties();
 
 		Server server = new Server(port);
 		server.setThreadPool(new QueuedThreadPool(maxThreads));
@@ -77,9 +77,4 @@ public class CacioMonitorServer {
 		System.setProperty("java.awt.graphicsenv", PTPGraphicsEnvironment.class.getName());
 	}
 
-	public static void main(String[] args) throws Exception {
-		int port = Integer.getInteger("cacio.web.port", 8081);
-		int maxThreads = Integer.getInteger("cacio.threads", 125);
-		new CacioServer(port, maxThreads);
-	}
 }
