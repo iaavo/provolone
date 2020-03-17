@@ -92,6 +92,7 @@
 					<systemPropertyVariables>
 						<awt.toolkit>net.java.openjdk.cacio.provolone.PTPToolkit </awt.toolkit>
 						<java.awt.graphicsenv>net.java.openjdk.cacio.provolone.PTPGraphicsEnvironment</java.awt.graphicsenv>
+						<java.awt.headless>false</java.awt.headless>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>

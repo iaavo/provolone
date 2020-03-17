@@ -2,11 +2,9 @@ package net.java.openjdk.cacio.monitor;
 
 import net.java.openjdk.cacio.provolone.PTPGraphicsEnvironment;
 import net.java.openjdk.cacio.provolone.PTPToolkit;
-import net.java.openjdk.cacio.server.CacioServer;
-import net.java.openjdk.cacio.servlet.ProvoloneStreamer;
 import net.java.openjdk.cacio.servlet.ProvoloneInitializeServlet;
+import net.java.openjdk.cacio.servlet.ProvoloneStreamer;
 import net.java.openjdk.cacio.servlet.ResourceLoaderServlet;
-import net.java.openjdk.cacio.servlet.WebSocketServlet;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
