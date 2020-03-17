@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import net.java.openjdk.awt.peer.web.WebSystemTrayPeer;
 import net.java.openjdk.cacio.ctc.CTCEventSource;
 import net.java.openjdk.cacio.monitor.CacioMonitorServer;
-import net.java.openjdk.cacio.monitor.CacioMonitorServerBurster;
 import sun.awt.peer.cacio.CacioToolkit;
 import sun.awt.peer.cacio.PlatformWindowFactory;
 import sun.awt.peer.cacio.managed.FullScreenWindowFactory;

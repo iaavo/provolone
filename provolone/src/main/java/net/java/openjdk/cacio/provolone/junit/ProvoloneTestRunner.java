@@ -7,8 +7,6 @@ import java.lang.reflect.Method;
 
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
-import net.java.openjdk.cacio.monitor.CacioMonitorServer;
-import net.java.openjdk.cacio.monitor.CacioMonitorServerBurster;
 import net.java.openjdk.cacio.provolone.PTPGraphicsEnvironment;
 import net.java.openjdk.cacio.provolone.PTPToolkit;
 
@@ -20,20 +18,12 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
 public class ProvoloneTestRunner extends BlockJUnit4ClassRunner {
-
 	static {
 		System.setProperty("awt.toolkit", PTPToolkit.class.getName());
 		System.setProperty("java.awt.graphicsenv",
 				PTPGraphicsEnvironment.class.getName());
 		System.setProperty("java.awt.headless", "false");
         System.setProperty("swing.defaultlaf", MetalLookAndFeel.class.getName());
-
-//		try {
-//			new CacioMonitorServer(8081, 125);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.exit(1);
-//		}
 	}
 
 	class MethodInvoker extends Statement {

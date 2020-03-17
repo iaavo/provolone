@@ -11,6 +11,9 @@ import java.awt.image.DirectColorModel;
 
 import sun.awt.peer.cacio.managed.FullScreenWindowFactory;
 
+/**
+ * Most simple graphics configuration with just the needed methods implemented.
+ */
 public class PTPGraphicsConfiguration extends GraphicsConfiguration {
 
 	private PTPGraphicsDevice device;
@@ -50,7 +53,7 @@ public class PTPGraphicsConfiguration extends GraphicsConfiguration {
 
 	@Override
 	public Rectangle getBounds() {
-        Dimension d = FullScreenWindowFactory.getScreenDimension();
-        return new Rectangle(0, 0, d.width, d.height);
+		Dimension d = FullScreenWindowFactory.getScreenDimension();
+		return new Rectangle(0, 0, d.width, d.height);
 	}
 }

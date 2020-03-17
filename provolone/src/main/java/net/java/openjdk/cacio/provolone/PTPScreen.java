@@ -71,6 +71,11 @@ public class PTPScreen extends WebScreen {
 		return surfaceData;
 	}
 
+	/**
+	 * Default no operation implementation. Might be implemented in the future.
+	 * 
+	 * @see net.java.openjdk.awt.peer.web.WebScreen#pollForScreenUpdates(int)
+	 */
 	public Transport pollForScreenUpdates(int timeout) throws IOException {
 		throw new UnsupportedOperationException(
 				"Call pollForScreenUpdates(int, String) instead.");

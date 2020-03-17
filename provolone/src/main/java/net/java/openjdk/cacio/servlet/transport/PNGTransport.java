@@ -13,6 +13,11 @@ import net.java.openjdk.awt.peer.web.TreeImagePacker;
 import net.java.openjdk.awt.peer.web.WebRect;
 import net.java.openjdk.cacio.servlet.transport.Transport;
 
+/**
+ * Uses <code>ImageIO</code> to write png images to an array of bytes and stores
+ * each data entry within a byte array using up the least possible amount of
+ * space.
+ */
 public class PNGTransport extends Transport {
 	private final byte[] emptyResponseData = intToByteArray(-1);
 
@@ -73,7 +78,7 @@ public class PNGTransport extends Transport {
 	@Override
 	public String asString() {
 		String string = "";
-		for(int cmdInt : cmdList) {
+		for (int cmdInt : cmdList) {
 			string += cmdInt + " ";
 		}
 		return string;

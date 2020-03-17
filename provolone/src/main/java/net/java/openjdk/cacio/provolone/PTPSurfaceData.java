@@ -3,7 +3,6 @@ package net.java.openjdk.cacio.provolone;
 import java.awt.GraphicsConfiguration;
 import java.awt.Rectangle;
 import java.awt.image.ColorModel;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.java.openjdk.awt.peer.web.BlitScreenUpdate;
@@ -13,6 +12,7 @@ import net.java.openjdk.awt.peer.web.WebScreen;
 import net.java.openjdk.awt.peer.web.WebSurfaceData;
 import sun.java2d.loops.SurfaceType;
 
+@SuppressWarnings("restriction")
 public class PTPSurfaceData extends WebSurfaceData {
 
 	static SurfaceType typeDefault = SurfaceType.IntRgb
@@ -80,7 +80,7 @@ public class PTPSurfaceData extends WebSurfaceData {
 	}
 
 	/**
-	 * @return A list with all ScreenUpdates, or null iff there are none.
+	 * @return A list with all ScreenUpdates, or null if there are none.
 	 */
 	public List<ScreenUpdate> fetchPendingSurfaceUpdates() {
 		addPendingUpdates(damageTracker.groupDamagedAreas(imgBuffer));

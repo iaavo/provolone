@@ -54,7 +54,7 @@ var eventBuffer = '';
 
 var isIE = navigator.userAgent.indexOf('MSIE') > -1;
 
-//Will be filled in by the SessionInitializeServlet at request time
+// Will be filled in by the SessionInitializeServlet at request time
 var imgFormat = IMGFORMAT;
 var subSessionID = imgFormat;
 
@@ -63,6 +63,9 @@ function init() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	
+	// TODO: sub session ID is misused here to input the transport 
+	// in order to avoid having to change the subscripts in the cacio-web 
+	// project accordingly. Needs to be fixed. 
 	subSessionID = chooseTransport();    
     startRequestFunc(subSessionID);
 	
